@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectra - Checklist Simplifiée</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="checklist-app">
+            
+            <!-- Navigation Tabs -->
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="switchTab('checklist')" id="tab-checklist">
+                    📋 Checklist
+                    <span class="tab-badge" id="checklist-badge">0%</span>
+                </button>
+                <button class="nav-tab" onclick="switchTab('history')" id="tab-history">
+                    📊 Historique
+                    <span class="tab-badge success" id="history-badge">0</span>
+                </button>
+            </div>
+
+            <!-- TAB 1: CHECKLIST -->
+            <div id="tab-checklist-content" class="tab-content active">
+                
+                <!-- Header simplifié -->
+                <div class="app-header">
+                    <div class="logo-section">
+                        <div class="logo-icon">⚡</div>
+                        <div class="logo-text">
+                            <div class="logo-title">SELECTRA</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-section">
+                        <div class="timer-display">
+                            <span class="timer-text" id="call-timer">00:00</span>
+                        </div>
+                        <button class="start-call-btn" id="start-call" onclick="startCall()">
+                            📞 Démarrer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section Client Simplifiée -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">👤 CLIENT</h3>
+                        <div class="section-counter" id="client-counter">0/5</div>
+                    </div>
+                    
+                    <div class="client-simple">
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label for="client-nom">Nom</label>
+                                <input type="text" id="client-nom" class="field-input" placeholder="Nom" data-section="client">
+                            </div>
+                            <div class="field-group">
+                                <label for="client-prenom">Prénom</label>
+                                <input type="text" id="client-prenom" class="field-input" placeholder="Prénom" data-section="client">
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label for="client-email">Email</label>
+                            <input type="email" id="client-email" class="field-input" placeholder="email@exemple.fr" data-section="client">
+                        </div>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label for="client-telephone">Téléphone</label>
+                                <input type="tel" id="client-telephone" class="field-input" placeholder="06 XX XX XX XX" data-section="client">
+                            </div>
+                            <div class="field-group">
+                                <label for="client-ville">Ville</label>
+                                <input type="text" id="client-ville" class="field-input" placeholder="Ville" data-section="client">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Mentions Légales - DÉPLACÉE ICI -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">⚖️ MENTIONS LÉGALES</h3>
+                        <div class="section-counter" id="mentions-counter">0/4</div>
+                    </div>
+                    
+                    <div class="checkbox-list">
+                        <label class="checkbox-item required">
+                            <input type="checkbox" id="mention-rgpd" data-section="mentions">
+                            <span class="checkmark"></span>
+                            <span class="item-label">RGPD données</span>
+                            <span class="badge badge-required">REQUIS</span>
+                        </label>
+                        
+                        <label class="checkbox-item required">
+                            <input type="checkbox" id="mention-reseau" data-section="mentions">
+                            <span class="checkmark"></span>
+                            <span class="item-label">Accès réseau</span>
+                            <span class="badge badge-required">REQUIS</span>
+                        </label>
+                        
+                        <label class="checkbox-item required">
+                            <input type="checkbox" id="mention-frais" data-section="mentions">
+                            <span class="checkmark"></span>
+                            <span class="item-label">Frais communiqués</span>
+                            <span class="badge badge-required">REQUIS</span>
+                        </label>
+                        
+                        <label class="checkbox-item required">
+                            <input type="checkbox" id="mention-retractation" data-section="mentions">
+                            <span class="checkmark"></span>
+                            <span class="item-label">Délai rétractation 14j</span>
+                            <span class="badge badge-required">REQUIS</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Section Services AXA -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">🛡️ AXA ASSISTANCE</h3>
+                        <div class="section-counter" id="axa-counter">Non proposé</div>
+                    </div>
+                    
+                    <div class="service-grid">
+                        <div class="service-option" data-service="axa" data-price="3.99" onclick="selectAXAOption(this)">
+                            <div class="service-price">3,99€</div>
+                            <div class="service-name">Essential</div>
+                            <div class="service-desc">Services de base</div>
+                        </div>
+                        <div class="service-option selected" data-service="axa" data-price="6.99" onclick="selectAXAOption(this)">
+                            <div class="service-price">6,99€</div>
+                            <div class="service-name">Standard</div>
+                            <div class="service-desc">Services complets</div>
+                        </div>
+                        <div class="service-option" data-service="axa" data-price="7.99" onclick="selectAXAOption(this)">
+                            <div class="service-price">7,99€</div>
+                            <div class="service-name">Premium</div>
+                            <div class="service-desc">Tous services</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-actions">
+                        <button class="service-btn propose-btn" onclick="proposeAXA()">💬 Proposer</button>
+                        <button class="service-btn sell-btn" onclick="sellAXA()">✅ Vendu</button>
+                        <button class="service-btn reset-btn" onclick="resetAXA()">❌ Reset</button>
+                    </div>
+                    
+                    <div class="service-status" id="axa-status">
+                        <span class="status-text">Non proposé</span>
+                        <span class="status-price" id="axa-price-display"></span>
+                    </div>
+                </div>
+
+                <!-- Section Services Offset -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">🌱 COMPENSATION CARBONE</h3>
+                        <div class="section-counter" id="offset-counter">Non proposé</div>
+                    </div>
+                    
+                    <div class="service-grid">
+                        <div class="service-option selected" data-service="offset" data-price="2.99" onclick="selectOffsetOption(this)">
+                            <div class="service-price">2,99€</div>
+                            <div class="service-name">2,24t CO₂</div>
+                        </div>
+                        <div class="service-option" data-service="offset" data-price="4.99" onclick="selectOffsetOption(this)">
+                            <div class="service-price">4,99€</div>
+                            <div class="service-name">3,59t CO₂</div>
+                        </div>
+                        <div class="service-option" data-service="offset" data-price="7.50" onclick="selectOffsetOption(this)">
+                            <div class="service-price">7,50€</div>
+                            <div class="service-name">5,40t CO₂</div>
+                        </div>
+                        <div class="service-option" data-service="offset" data-price="14.99" onclick="selectOffsetOption(this)">
+                            <div class="service-price">14,99€</div>
+                            <div class="service-name">11,34t CO₂</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-actions">
+                        <button class="service-btn propose-btn" onclick="proposeOffset()">💬 Proposer</button>
+                        <button class="service-btn sell-btn" onclick="sellOffset()">✅ Vendu</button>
+                        <button class="service-btn reset-btn" onclick="resetOffset()">❌ Reset</button>
+                    </div>
+                    
+                    <div class="service-status" id="offset-status">
+                        <span class="status-text">Non proposé</span>
+                        <span class="status-price" id="offset-price-display"></span>
+                    </div>
+                </div>
+
+                <!-- Section Autres Services -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">🎯 AUTRES SERVICES</h3>
+                        <div class="section-counter" id="autres-counter">0/2</div>
+                    </div>
+                    
+                    <div class="checkbox-list">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="service-mcp" data-section="autres">
+                            <span class="checkmark"></span>
+                            <span class="item-label">Mon Conseiller Perso</span>
+                        </label>
+                        
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="service-voltalis" data-section="autres">
+                            <span class="checkmark"></span>
+                            <span class="item-label">Voltalis RDV planifié</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Résumé Commercial -->
+                <div class="section">
+                    <div class="commercial-summary">
+                        <div class="summary-title">📊 RÉSUMÉ COMMERCIAL</div>
+                        <div class="summary-content">
+                            <div class="summary-item">
+                                <span class="summary-label">Services vendus:</span>
+                                <span class="summary-value" id="services-sold-count">0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Services proposés:</span>
+                                <span class="summary-value" id="services-proposed-count">0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Chiffre d'affaires:</span>
+                                <span class="summary-value" id="revenue-total">0,00€</span>
+                            </div>
+                        </div>
+                        <div class="summary-goal">
+                            <span id="goal-status">🎯 Objectif: 2 services vendus</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions finales -->
+                <div class="final-actions">
+                    <button class="action-btn validate-btn" id="validate-btn" onclick="validateSale()" disabled>
+                        ⚠️ Compléter pour valider
+                    </button>
+                    <button class="action-btn reset-btn" onclick="resetAll()">
+                        🔄 Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 2: HISTORIQUE -->
+            <div id="tab-history-content" class="tab-content">
+                <div class="history-container">
+                    <div class="history-header">
+                        <h3 class="history-title">📊 Historique</h3>
+                        <div class="history-stats">
+                            <div class="history-stat">
+                                <span>Ventes:</span>
+                                <strong id="total-sales">0</strong>
+                            </div>
+                            <div class="history-stat">
+                                <span>CA:</span>
+                                <strong id="total-revenue">0€</strong>
+                            </div>
+                        </div>
+                        <button class="clear-history-btn" onclick="clearHistory()">🗑️ Vider</button>
+                    </div>
+                    
+                    <div class="history-list" id="history-list">
+                        <div class="history-empty">
+                            <div class="history-empty-icon">📋</div>
+                            <p>Aucune vente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Validation -->
+        <div id="validation-modal" class="validation-modal">
+            <div class="validation-content">
+                <div class="validation-header">
+                    <h3>🎯 Validation Vente</h3>
+                </div>
+                
+                <div class="validation-body" id="validation-summary">
+                    <!-- Contenu généré dynamiquement -->
+                </div>
+                
+                <div class="validation-actions">
+                    <button class="validation-btn cancel" onclick="closeValidationModal()">
+                        Annuler
+                    </button>
+                    <button class="validation-btn save" onclick="saveToHistory()">
+                        💾 Enregistrer
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div id="notification" class="notification" style="display: none;"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
